@@ -23,6 +23,13 @@ spec:
           image: sweasytech/auth
           ports:
             - containerPort: 5000
+          resources:
+            requests:
+              cpu: "100m"  # request 100 milliCPU (0.1 CPU)
+              memory: "128Mi"  # request 128 MiB of memory
+            limits:
+              cpu: "500m"  # limit to 500 milliCPU (0.5 CPU)
+              memory: "256Mi"  # limit to 256 MiB of memory
           envFrom:
             - configMapRef:
                 name: auth-configmap

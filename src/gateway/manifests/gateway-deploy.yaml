@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway
+  labels:
+    app: gateway
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: gateway
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 3
+  template:
+    metadata:
+      labels:
+        app: gateway
+    spec:
+      containers:
+
+        - name: gateway
+          resources:
+            requests:
+              cpu: "100m"  # request 100 milliCPU (0.1 CPU)
+              memory: "128Mi"  # request 128 MiB of memory
+            limits:
+              cpu: "500m"  # limit to 500 milliCPU (0.5 CPU)
+              memory: "256Mi"  # limit to 256 MiB of memory
+          image: faakhirzahid/video-convertor-gateway
+          envFrom:
+            - configMapRef:
+                name: gateway-configmap
+            - secretRef:
+                name: gateway-secret

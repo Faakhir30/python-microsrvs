@@ -28,7 +28,7 @@ spec:
             limits:
               cpu: "500m"  # limit to 500 milliCPU (0.5 CPU)
               memory: "256Mi"  # limit to 256 MiB of memory
-          image: faakhirzahid/video-convertor-gateway
+          image: faakhirzahid/video-convertor-gateway:latest
           envFrom:
             - configMapRef:
                 name: gateway-configmap
